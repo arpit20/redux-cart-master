@@ -1,0 +1,44 @@
+.trending-header{
+    width: 100%;
+    background-color: #ccc;
+    color: #49494a;
+    box-sizing: border-box;
+    padding: 5px 15px;
+    margin-top: 20px;
+    text-align: left;
+
+
+    h4{
+        margin: 0;
+    }
+}
+
+.trending-items{
+    display: flex;
+
+    .item-card{
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 20%;
+        /* align-items: center; */
+        box-sizing: border-box;
+        padding: 20px;
+        text-align: left;
+        img{
+            height: auto;
+            margin: 0 auto;
+            max-height: 120px;
+            max-width: 100%;
+            width: auto;
+          
+        }
+        a{
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .item-card__pirce{
+            margin-top:5px;
+        }
+    }
+}
+
