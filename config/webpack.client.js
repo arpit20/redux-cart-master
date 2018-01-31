@@ -201,13 +201,33 @@ module.exports = {
 
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
-    new CleanWebpackPlugin(['../build/']),
+    new CleanWebpackPlugin([ path.resolve(__dirname,'..','build','static')]),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': isProd ? '"production"' : '"development"',
       __BROWSER__: true,
       __PWA_ENV__: JSON.stringify(__PWA_ENV__),
       __LOCAL__: __PWA_ENV__ === 'local',
     }),
+    new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false,
+          // Disabled because of an issue with Uglify breaking seemingly valid code:
+          // https://github.com/facebookincubator/create-react-app/issues/2376
+          // Pending further investigation:
+          // https://github.com/mishoo/UglifyJS2/issues/2011
+          comparisons: false,
+        },
+        mangle: {
+          safari10: true,
+        },        
+        output: {
+          comments: false,
+          // Turned on because emoji and regex is not minified properly using default
+          // https://github.com/facebookincubator/create-react-app/issues/2488
+          ascii_only: true,
+        },
+        sourceMap: true,
+      }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor','webpackManifest'],
       minChunks: Infinity,
@@ -230,7 +250,7 @@ module.exports = {
 
 
 
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
 
   devServer: {
     contentBase: path.resolve(__dirname,'..','build'),
