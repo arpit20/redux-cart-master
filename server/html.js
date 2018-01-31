@@ -10,6 +10,10 @@ export  default (app, initialState,modules) =>{
             <html lang="en">
             <head>
                 <link rel="stylesheet" href="${assetsManifest['main.css']}">
+                <link rel="preload" as="script" href="${assetsManifest['webpackManifest.js']}">
+                <link rel="preload" as="script" href="${assetsManifest['vendor.js']}">
+                <link rel="preload" as="script" href="${assetsManifest['main.js']}">
+                
             </head>
             <body>
                 <div id="root">${app}</div>
