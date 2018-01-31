@@ -9,9 +9,9 @@ import '../styles/App.scss';
 
 import * as API from '../api';
 
-import ItemContainer from '../components/Product/ItemContainer';
-import ProductList from './ProductList';
 
+import {fetchTrendingProducts} from '../actions/trendingProductActions';
+import {fetchMVProducts} from '../actions/trendingProductActions';
 import {fetchTopLevelCategories} from '../actions/categoriesActions';
 
 /**
@@ -27,7 +27,10 @@ class LandingPage extends Component {
   }
 
   static fetchData(store){
-        return store.dispatch(fetchTopLevelCategories());
+    return Promise.all([store.dispatch(fetchTopLevelCategories()),
+        store.dispatch(fetchTrendingProducts()),
+        store.dispatch(fetchMVProducts())]);
+ 
   }
 
   componentDidMount(){

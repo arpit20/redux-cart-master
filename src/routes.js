@@ -2,8 +2,9 @@ import React from 'react';
 // import {Route, BrowserRouter, Switch} from 'react-router-dom';
 
 import LandingPage from './views/LandingPage';
-import ItemContainer from './components/Product/ItemContainer';
-import ProductList from './views/ProductList';
+
+import ItemContainerAsync from './components/Product/ItemContainerAsync';
+import ProductListAsync from './views/ProductListAsync';
 import Loadable from 'react-loadable';
 
 // export const AppRoutes = () =>(
@@ -27,9 +28,9 @@ export default ([{
     routes:[{
         path:'/',
         exact:true,
-        component:ItemContainer
+        component:ItemContainerAsync
     },{
         path:'/category/:cat',
-        component:ProductList
+        component:ProductListAsync
     }]
 }])
