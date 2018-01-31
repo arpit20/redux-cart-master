@@ -66,14 +66,13 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": " scripts/start.js",
     "build": "NODE_ENV=production webpack --config ./config/webpack.client.js --progress",
     "test": "node scripts/test.js --env=jsdom",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "build:server": "NODE_ENV=production webpack --config ./webpack.server.js --progress",
-    "start:server": "NODE_ENV=production node ./build/server/server.js",
-    "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build && npm run build:server && npm run start:server"
+    "start": "NODE_ENV=production node ./build/server/server.js",
+    "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build && npm run build:server"
     
   },
   "homepage": "https://jesperorb.github.io/redux-cart",
