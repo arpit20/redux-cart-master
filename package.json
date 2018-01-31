@@ -72,7 +72,9 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "build:server": "NODE_ENV=production webpack --config ./webpack.server.js --progress",
-    "start:server": "NODE_ENV=production node ./build/server/server.js"
+    "start:server": "NODE_ENV=production node ./build/server/server.js",
+    "heroku-postbuild": "npm install --no-shrinkwrap && npm run build && npm run build:server && npm run start:server"
+    
   },
   "homepage": "https://jesperorb.github.io/redux-cart",
   "license": "MIT",
