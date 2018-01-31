@@ -243,7 +243,8 @@ module.exports = {
       prettyPrint: true,
     }),
     new ExtractTextPlugin({
-        filename: 'static/css/[name].[contenthash:8].css'
+        filename: 'static/css/[name].[contenthash:8].css',
+        allChunks: true
     })
    
   ],
