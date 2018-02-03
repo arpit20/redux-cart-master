@@ -7,6 +7,6 @@ export default Loadable({
         return import('./ItemContainer' /* webpackChunkName: 'ItemContainer' */);
     },
 
-    loading:()=> <p>Loading the UserList component...</p>
+    loading:()=> <p></p>
     
 })

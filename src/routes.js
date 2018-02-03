@@ -16,10 +16,7 @@ import Loadable from 'react-loadable';
 // const LandingPageAsync = Loadable({
 //     loader: () => {
 //         return import('./views/LandingPage' /* webpackChunkName: 'LandingPage' */);
-//     },
-
-//     loading:()=> <p>Loading the LandingPage component...</p>
-    
+//     },    
 // })
 
 export default ([{

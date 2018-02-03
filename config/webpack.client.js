@@ -3,8 +3,10 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
-const AssetsPlugin = require('webpack-manifest-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const AssetsPlugin = require('assets-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-css-chunks-webpack-plugin');
+
 // const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 // const DashboardPlugin = require('webpack-dashboard/plugin');
@@ -39,70 +41,20 @@ module.exports = {
     rules: isProd ? [
       { test: /\.js$/, exclude: /node_modules/, use: ['babel-loader'] },
       {
+       
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract(
-          Object.assign(
-            {
-              fallback: {
-                loader: require.resolve('style-loader'),
-                options: {
-                  hmr: false,
-                },
-              },
-              use: [
-                {
-                  loader: require.resolve('css-loader'),
-                  options: {
-                    importLoaders: 1,
-                    minimize: true,
-                    modules: true,
-                    sourceMap: true
-                  },
-                }
-                // {
-                //   loader: require.resolve('postcss-loader'),
-                //   options: {
-                //     // Necessary for external CSS imports to work
-                //     // https://github.com/facebookincubator/create-react-app/issues/2677
-                //     ident: 'postcss',
-                //     plugins: () => [
-                //       require('postcss-flexbugs-fixes'),
-                //       autoprefixer({
-                //         browsers: [
-                //           '>1%',
-                //           'last 4 versions',
-                //           'Firefox ESR',
-                //           'not ie < 9', // React doesn't support IE8 anyway
-                //         ],
-                //         flexbox: 'no-2009',
-                //       }),
-                //     ],
-                //   },
-                // },
-              ],
-            }
-           
-          )
-        )
+        loader: ExtractTextPlugin.extract({ use: [{ loader: 'css-loader',
+         options: { importLoaders: 1 } }] 
+        }) 
+          
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
       },
      {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: false,
-                sourceMap: true,
-                importLoaders: 1
-              }
-            },
-            'sass-loader'
-          ]
-        })
-    },
+        loader: ExtractTextPlugin.extract({ use: [{ loader: 'css-loader',
+        options: { importLoaders: 1 } },'sass-loader'] 
+       }) 
+     },
  
       { test: /\.(gif|png|jpe?g|svg|ico)$/i, use: [{ loader: 'file-loader', options: { name: 'images/[name].[hash:8].[ext]' } }] },
       { test: /\.(woff(2)?|ttf|otf|eot)(\?[a-z0-9=&.]+)?$/, use: [{ loader: 'url-loader', options: { limit: 1000, name: 'fonts/[name].[hash:8].[ext]' } }] },
@@ -239,12 +191,11 @@ module.exports = {
     }),
     new AssetsPlugin({
       filename: 'asset-manifest.json',
-      path: path.resolve('../build/'),
+      path: path.resolve(__dirname,'..','build'),
       prettyPrint: true,
     }),
     new ExtractTextPlugin({
-        filename: 'static/css/[name].[contenthash:8].css',
-        allChunks: true
+        filename: 'static/css/[name].[contenthash:8].css'
     })
    
   ],
