@@ -36,6 +36,7 @@ export  default (app, initialState,modules) =>{
             <body>
                 <div id="root">${app}</div>
                 <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>
+                <script>window.__ASSETS_MANIFEST__ = ${JSON.stringify(assetsManifest)}</script>
                 <script src="${assets.webpackManifest.js}"></script>
                 <script src="${assets.vendor.js}"></script>
                 <script src="${assets.main.js}"></script>

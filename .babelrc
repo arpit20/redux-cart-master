@@ -24,7 +24,8 @@
       "production": {
         "plugins": [
             "syntax-dynamic-import",
-            "react-loadable/babel"
+            "react-loadable/babel",
+            "dual-import"
         ]
       }
     }
