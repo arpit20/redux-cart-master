@@ -2,6 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -160,6 +161,10 @@ module.exports = {
       __PWA_ENV__: JSON.stringify(__PWA_ENV__),
       __LOCAL__: __PWA_ENV__ === 'local',
     }),
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: path.resolve(__dirname,'..','public','index.html')
+    }),
     new webpack.optimize.UglifyJsPlugin({
         compress: {
           warnings: false,
@@ -202,7 +207,7 @@ module.exports = {
 
 
 
-  devtool: 'cheap-module-source-map',
+  devtool: 'inline-source-map',
 
   devServer: {
     contentBase: path.resolve(__dirname,'..','build'),

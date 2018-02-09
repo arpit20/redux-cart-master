@@ -33,6 +33,43 @@ module.exports = {
     ],
   },
 
+  plugins: [
+
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': isProd ? '"production"' : '"development"',
+      __BROWSER__: false,
+      __PWA_ENV__: JSON.stringify(__PWA_ENV__),
+      __LOCAL__: __PWA_ENV__ === 'local',
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      children: true,
+      minChunks: 2,
+    }),
+    ...(isProd ? [
+      new webpack.LoaderOptionsPlugin({
+        minimize: true,
+        debug: false,
+      }),
+      new webpack.HashedModuleIdsPlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true,
+        compress: {
+          screw_ie8: true,
+          warnings: false,
+        },
+        mangle: {
+          screw_ie8: true,
+        },
+        output: {
+          comments: false,
+          screw_ie8: true,
+        },
+      }),
+    ] : [
+      new webpack.NamedModulesPlugin(),
+    ]),
+  ],
+
  
   devtool: 'source-map'
 };

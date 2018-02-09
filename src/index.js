@@ -17,7 +17,7 @@ const mountPoint = document.getElementById('root')
 //Provider makes so that every connected container component
 //gets access to the store, you have to create the store based
 //on your store configuration the pass it along to the providers
-ReactDOM.hydrate(
+ReactDOM.render(
  <Provider store={store}>
    <BrowserRouter>
       {renderRoutes(AppRoutes)}
